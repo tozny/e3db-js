@@ -39,7 +39,7 @@
       "node": true
     },
     "rules": {
-      "max-params": ["error", 7],
+      "max-params": ["error", 9],
       "no-prototype-builtins": ["off"],
       "prettier/prettier": [
         "error",
