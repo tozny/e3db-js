@@ -61,12 +61,11 @@ async function main() {
   // Query for all records of type 'test-contact' and print out
   // a little bit of data and metadata.
   var data = true
-  var raw = false
   var writer = null
   var record = null
   var type = 'test-contact'
 
-  let queryResult = await client.query(data, raw, writer, record, type)
+  let queryResult = await client.query(data, writer, record, type)
   for (let rec of queryResult) {
     console.log('Data:     ' + rec.data.name + ' ' + rec.data.whatHeKnows)
     console.log('Metadata: ' + rec.meta.recordId + ' ' + rec.meta.type)
@@ -110,12 +109,11 @@ async function main() {
 
   // Execute that query:
   data = true
-  raw = false
   writer = null
   record = null
   type = null
 
-  queryResult = await client.query(data, raw, writer, record, type, queryWesteros)
+  queryResult = await client.query(data, writer, record, type, queryWesteros)
   for (let record of queryResult) {
     console.log(record.data.name)
   }
@@ -130,12 +128,11 @@ async function main() {
 
   // Execute that query:
   data = true
-  raw = false
   writer = null
   record = null
   type = null
 
-  queryResult = await client.query(data, raw, writer, record, type, queryWesteros)
+  queryResult = await client.query(data, writer, record, type, queryWesteros)
   for (let record of queryResult) {
     console.log(record.data.name)
   }
@@ -185,12 +182,11 @@ async function main() {
 
   // Delete all of the records of type test-contact from previous runs:
   data = false
-  raw = false
   writer = null
   record = null
   type = 'test-contact'
 
-  queryResult = await client.query(data, raw, writer, record, type)
+  queryResult = await client.query(data, writer, record, type)
   for (let record of queryResult) {
     await client.delete(record.meta.record_id)
   }
