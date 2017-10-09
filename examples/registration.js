@@ -31,10 +31,6 @@ async function main() {
   console.log('Public Key:  ' + publicKey)
   console.log('Private Key: ' + privateKey)
 
-  // The e3db server keeps track of the name of the curve used with public keys,
-  // so we need to wrap the generated version with an object helper
-  let wrappedKey = new e3db.PublicKey(publicKey)
-
   // Clients must be registered with a name unique to your account to help
   // differentiate between different sets of credentials in the Admin Console.
   // In this example, the name is set at random
@@ -44,7 +40,7 @@ async function main() {
 
   // Passing all of the data above into the registration routine will create
   // a new client with the system. Remember to keep your private key private!
-  let clientInfo = await e3db.Client.register(token, clientName, wrappedKey)
+  let clientInfo = await e3db.Client.register(token, clientName, publicKey)
 
   // Optionally, you can automatically back up the credentials of the newly-created
   // client to your InnoVault account (accessible via https://console.tozny.com) by

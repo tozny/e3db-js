@@ -44,8 +44,7 @@ let token = '...'
 let clientName = '...'
 
 let [publicKey] = e3db.Client.generateKeypair()
-wrappedKey = new e3db.PublicKey(publicKey)
-e3db.Client.register(token, clientName, wrappedKey)
+e3db.Client.register(token, clientName, publicKey)
   .then(clientInfo => {
     // ... Run operations with the client's details here
   })
@@ -62,8 +61,7 @@ let token = '...'
 let clientName = '...'
 
 let [publicKey, privateKey] = e3db.Client.generateKeypair()
-wrappedKey = new e3db.PublicKey(publicKey)
-e3db.Client.register(token, clientName, wrappedKey, privateKey, true)
+e3db.Client.register(token, clientName, publicKey, privateKey, true)
   .then(clientInfo => {
     // ... Run operations with the client's details here
   })
