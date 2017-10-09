@@ -135,7 +135,7 @@ let type = 'contact'
 
 client.query(data, raw, writer, record, type)
   .then(records => {
-    let fullName = record.data.full_name + ' ' + record.data.last_name
+    let fullName = record.data.first_name + ' ' + record.data.last_name
     console.log(fullName + ' --- ' + record.data.phone)
   })
 ```
