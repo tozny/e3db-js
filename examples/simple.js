@@ -202,8 +202,6 @@ async function main() {
   for (let record of queryResult) {
     await client.delete(record.meta.record_id)
   }
-
-  client.close()
 }
 
 main()

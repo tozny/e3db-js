@@ -84,12 +84,6 @@ async function main() {
   // From this point on, the new client can be used as any other client to read
   // write, delete, and query for records. See the `simple.js` documentation
   // for more complete examples ...
-
-  // Once you're done with the client, be sure to close things down to kill a timer
-  // that automatically refreshes the client's authentication token. Usually, the
-  // garbage collector will do this for you. If you're running other asynchronous
-  // code, however, this operation will likely be manual.
-  client.close()
 }
 
 main()
