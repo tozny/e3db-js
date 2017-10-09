@@ -149,27 +149,6 @@ async function main() {
 
   /**
      * ---------------------------------------------------------
-     * More reading and inspection of records
-     * ---------------------------------------------------------
-     */
-
-  // read_raw gets a record without decrypting its data
-  let rawRecord = await client.readRaw(recordId)
-  var newRecord = await client.read(recordId)
-
-  // So let's compare them:
-
-  console.log(rawRecord.meta == newRecord.meta)
-  console.log(rawRecord.data == newRecord.data)
-
-  console.log(newRecord.data.name + ' encrypts to ' + rawRecord.data.name)
-
-  // Records contain a few other fields that are fun to look at, and this gives
-  // you a good sense for what's encrypted and what's not:
-  console.log(rawRecord)
-
-  /**
-     * ---------------------------------------------------------
      * Clean up - Comment these out if you want to experiment
      * ---------------------------------------------------------
      */
