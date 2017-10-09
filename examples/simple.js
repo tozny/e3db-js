@@ -82,12 +82,6 @@ async function main() {
   let isaacClientId = 'db1744b9-3fb6-4458-a291-0bc677dba08b'
   await client.share('test-contact', isaacClientId)
 
-  // Alternatively, share all of the records of type 'test-contact' with Isaac's
-  // email address. This only works if the client has opted into discovery of
-  // their client_id.
-
-  // await client.share('test-contact', 'ijones+feedback@tozny.com')
-
   /**
     * ---------------------------------------------------------
     * More complex queries
@@ -151,8 +145,6 @@ async function main() {
      * Learning about other clients
      * ---------------------------------------------------------
      */
-  let isaacClientInfo = await client.clientInfo('ijones+feedback@tozny.com')
-  console.log(isaacClientInfo)
 
   // Fetch the public key:
   let isaacPubKey = await client.clientKey(isaacClientId)
@@ -186,7 +178,7 @@ async function main() {
      */
 
   // Revoke the sharing created by the client.share
-  await client.revoke('test-contact', 'ijones+feedback@tozny.com')
+  await client.revoke('test-contact', isaacClientId)
 
   // Delete the record we created above
   await client.delete(recordId)
