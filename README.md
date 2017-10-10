@@ -128,12 +128,11 @@ const e3db = require('e3db')
 let client = new e3db.Client(/* config */)
 
 let data = true
-let raw = false
 let writer = null
 let record = null
 let type = 'contact'
 
-client.query(data, raw, writer, record, type)
+client.query(data, writer, record, type).next()
   .then(records => {
     let fullName = record.data.first_name + ' ' + record.data.last_name
     console.log(fullName + ' --- ' + record.data.phone)

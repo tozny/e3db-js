@@ -65,7 +65,7 @@ async function main() {
   var record = null
   var type = 'test-contact'
 
-  let queryResult = await client.query(data, writer, record, type)
+  let queryResult = await client.query(data, writer, record, type).next()
   for (let rec of queryResult) {
     console.log('Data:     ' + rec.data.name + ' ' + rec.data.whatHeKnows)
     console.log('Metadata: ' + rec.meta.recordId + ' ' + rec.meta.type)
@@ -113,7 +113,7 @@ async function main() {
   record = null
   type = null
 
-  queryResult = await client.query(data, writer, record, type, queryWesteros)
+  queryResult = await client.query(data, writer, record, type, queryWesteros).next()
   for (let record of queryResult) {
     console.log(record.data.name)
   }
@@ -132,7 +132,7 @@ async function main() {
   record = null
   type = null
 
-  queryResult = await client.query(data, writer, record, type, queryWesteros)
+  queryResult = await client.query(data, writer, record, type, queryWesteros).next()
   for (let record of queryResult) {
     console.log(record.data.name)
   }
@@ -165,7 +165,7 @@ async function main() {
   record = null
   type = 'test-contact'
 
-  queryResult = await client.query(data, writer, record, type)
+  queryResult = await client.query(data, writer, record, type).next()
   for (let record of queryResult) {
     await client.delete(record.meta.record_id)
   }
