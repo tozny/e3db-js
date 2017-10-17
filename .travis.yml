@@ -3,6 +3,3 @@ node_js:
   - 7
   - 6
 after_script: 'cat ./coverage/lcov.info | coveralls'
-cache:
-  directories:
-    - "node_modules"
