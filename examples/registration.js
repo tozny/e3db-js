@@ -6,7 +6,7 @@
  * with no possibilities of a credential leak). For more detailed information,
  * please see the documentation home page: https://tozny.com/documentation/e3db
  *
- * @author    Eric Mann (eric@tozny.com)
+ * @author    Eric Mann <eric@tozny.com>
  * @copyright Copyright (c) 2017 Tozny, LLC
  * @license   Public Domain
 */

@@ -155,7 +155,7 @@ Bug reports and pull requests are welcome on GitHub at https://github.com/tozny/
 
 ## License
 
-This library is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+Tozny dual licenses this product. For commercial use, please contact [info@tozny.com](mailto:info@tozny.com). For non-commercial use, this license permits use of the software only by government agencies, schools, universities, non-profit organizations or individuals on projects that do not receive external funding other than government research grants and contracts. Any other use requires a commercial license. For the full license, please see [LICENSE.md](https://github.com/tozny/e3db-js/blob/master/LICENSE.md), in this source repository.
 
 [npm-image]: https://badge.fury.io/js/e3db.svg
 [npm-url]: https://npmjs.org/package/e3db
