@@ -75,7 +75,7 @@ provided that the Licensed Software so included shall in any case
 remain subject to the terms of this License.
 
 1.15. "Original Source Code" means the Source Code for the
-_E3DB JavaScript SDK_ as made available for
+_E3DB JS SDK_ as made available for
 download by TOZNY from [https://github.com/tozny/e3db-js/](https://github.com/tozny/e3db-js/).
 
 1.16. "Source Code" means the preferred form of software for
@@ -113,10 +113,10 @@ license to copy, use and Distribute Executable versions of the
 Original Source Code and Modifications.
 
 2.2. Distributor Grant. If You are a Distributor, You hereby grant
-the Community a worldwide, royalty-free, non-exclusive license
-under the Distributor IP, solely for the Licensed Purpose and
-subject to the terms and conditions of this License, to modify,
-copy, use, and Distribute the Distributor Code and Modifications.
+TOZNY a worldwide, royalty-free, non-exclusive license under the
+Distributor IP, solely for the Licensed Purpose and subject to the
+terms and conditions of this License, to modify, copy, use, and
+Distribute the Distributor Code and Modifications.
 
 2.3. Sublicenses. The license rights that are granted under this
 Section 2 may be sublicensed only by Distributing Licensed
@@ -152,13 +152,13 @@ prior express written consent of Tozny.
 3.2. Required Availability of Source Code. If You Distribute
 Licensed Software for which you are a Contributor, You must make
 the Source Code for all Modifications to which you contribute
-publicly available to the Community, under the terms of this
-License and at no additional restriction or cost, via an accepted
-Electronic Distribution Mechanism for a period of at least twelve
-(12) months following the date You first Distribute the Licensed
-Software. You must also include with the Source Code a file
-documenting any changes You made to create each Modification, and
-the dates of such changes.
+publicly available to TOZNY or the Community, under the terms of
+this License and at no additional restriction or cost, via an
+accepted Electronic Distribution Mechanism for a period of at
+least twelve (12) months following the date You first Distribute
+the Licensed Software. You must also include with the Source Code
+a file documenting any changes You made to create each
+Modification, and the dates of such changes.
 
 3.3. Licensee Registration. Before You Distribute any Licensed
 Software under this License, You must first register by sending
@@ -239,12 +239,17 @@ construed against the drafter shall not apply to this License.
 
 EXHIBIT A
 
-The contents of this file are subject to the TOZNY NON-COMMERCIAL
-LICENSE (the "License"); you may not use this file except in
-compliance with the License. You may obtain a copy of the License at
-[https://github.com/tozny/e3db-js/](https://github.com/tozny/e3db-js/). Software distributed under the
-License is distributed on an "AS IS" basis, WITHOUT WARRANTY OF ANY
-KIND, either express or implied. See the License for the specific
-language governing rights and limitations under the License. Portions
-of the software are Copyright (c) TOZNY LLC, 2017. All rights
-reserved.
+Tozny dual licenses this product. For commercial use, please contact
+info@tozny.com. For non-commercial use, the contents of this file are
+subject to the TOZNY NON-COMMERCIAL LICENSE (the "License") which
+permits use of the software only by government agencies, schools,
+universities, non-profit organizations or individuals on projects that
+do not receive external funding other than government research grants
+and contracts.  Any other use requires a commercial license. You may
+not use this file except in compliance with the License. You may obtain
+a copy of the License at https://tozny.com/legal/non-commercial-license.
+Software distributed under the License is distributed on an "AS IS"
+basis, WITHOUT WARRANTY OF ANY KIND, either express or implied. See the
+License for the specific language governing rights and limitations under
+the License. Portions of the software are Copyright (c) TOZNY LLC, 2017.
+All rights reserved.
