@@ -23,6 +23,7 @@ async function main() {
   // A registration token is required to set up a client. In this situation,
   // we assume an environment variable called REGISTRATION_TOKEN is set
   let token = process.env.REGISTRATION_TOKEN
+  let apiUrl = process.env.API_URL || 'https://api.e3db.com'
 
   // Clients can either create new cryptographic keypairs, or load in a pre-defined
   // pair of Curve25519 keys. In this situation, we will generate a new keypair.
@@ -39,11 +40,11 @@ async function main() {
   // In this example, the name is set at random
   let clientName = 'example_client_' + Math.random().toString(36).substr(2)
 
-  console.log('Client Name: ' + clientName)
+  console.log('Client Name:         ' + clientName)
 
   // Passing all of the data above into the registration routine will create
   // a new client with the system. Remember to keep your private key private!
-  let clientInfo = await e3db.Client.register(token, clientName, cryptoKeys, signingKeys)
+  let clientInfo = await e3db.Client.register(token, clientName, cryptoKeys, signingKeys, false, apiUrl)
 
   // Optionally, you can automatically back up the credentials of the newly-created
   // client to your InnoVault account (accessible via https://console.tozny.com) by
@@ -53,11 +54,11 @@ async function main() {
   //
   // Client credentials are not backed up by default.
 
-  // let clientInfo = await e3db.Client.register(token, clientName, cryptoKeys, signingKeys, true)
+  // let clientInfo = await e3db.Client.register(token, clientName, cryptoKeys, signingKeys, true, apiUrl)
 
-  console.log('Client ID:   ' + clientInfo.clientId)
-  console.log('API Key ID:  ' + clientInfo.apiKeyId)
-  console.log('API Secret:  ' + clientInfo.apiSecret)
+  console.log('Client ID:           ' + clientInfo.clientId)
+  console.log('API Key ID:          ' + clientInfo.apiKeyId)
+  console.log('API Secret:          ' + clientInfo.apiSecret)
 
   /**
    * ---------------------------------------------------------
@@ -73,8 +74,11 @@ async function main() {
       clientInfo.clientId,
       clientInfo.apiKeyId,
       clientInfo.apiSecret,
-      publicKey,
-      privateKey
+      cryptoKeys.publicKey,
+      cryptoKeys.privateKey,
+      apiUrl,
+      signingKeys.publicKey,
+      signingKeys.privateKey
   )
 
   // Now create a client using that configuration.
