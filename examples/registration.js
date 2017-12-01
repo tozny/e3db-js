@@ -26,10 +26,13 @@ async function main() {
 
   // Clients can either create new cryptographic keypairs, or load in a pre-defined
   // pair of Curve25519 keys. In this situation, we will generate a new keypair.
-  let [publicKey, privateKey] = e3db.Client.generateKeypair();
+  let cryptoKeys = e3db.Client.generateKeypair();
+  let signingKeys = e3db.Client.generateSigningKeypair();
 
-  console.log('Public Key:  ' + publicKey)
-  console.log('Private Key: ' + privateKey)
+  console.log('Public Key:          ' + cryptoKeys.publicKey)
+  console.log('Private Key:         ' + cryptoKeys.privateKey)
+  console.log('Public Signing Key:  ' + signingKeys.publicKey)
+  console.log('Private Signing Key: ' + signingKeys.privateKey)
 
   // Clients must be registered with a name unique to your account to help
   // differentiate between different sets of credentials in the Admin Console.
@@ -40,7 +43,7 @@ async function main() {
 
   // Passing all of the data above into the registration routine will create
   // a new client with the system. Remember to keep your private key private!
-  let clientInfo = await e3db.Client.register(token, clientName, publicKey)
+  let clientInfo = await e3db.Client.register(token, clientName, cryptoKeys, signingKeys)
 
   // Optionally, you can automatically back up the credentials of the newly-created
   // client to your InnoVault account (accessible via https://console.tozny.com) by
@@ -50,7 +53,7 @@ async function main() {
   //
   // Client credentials are not backed up by default.
 
-  // let clientInfo = await e3db.Client.register(token, clientName, wrappedKey, privateKey, true)
+  // let clientInfo = await e3db.Client.register(token, clientName, cryptoKeys, signingKeys, true)
 
   console.log('Client ID:   ' + clientInfo.clientId)
   console.log('API Key ID:  ' + clientInfo.apiKeyId)

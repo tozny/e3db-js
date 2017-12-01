@@ -23,7 +23,9 @@ let config = new e3db.Config(
   process.env.API_SECRET,
   process.env.PUBLIC_KEY,
   process.env.PRIVATE_KEY,
-  process.env.API_URL
+  process.env.API_URL,
+  process.env.PUBLIC_SIGN_KEY,
+  process.env.PRIVATE_SIGN_KEY
 )
 
 // Now create a client using that configuration
