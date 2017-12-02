@@ -169,7 +169,7 @@ async function main() {
 
   queryResult = await client.query(data, writer, record, type).next()
   for (let record of queryResult) {
-    await client.delete(record.meta.record_id)
+    await client.delete(record.meta.recordId)
   }
 }
 

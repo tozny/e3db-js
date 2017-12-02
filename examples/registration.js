@@ -27,8 +27,8 @@ async function main() {
 
   // Clients can either create new cryptographic keypairs, or load in a pre-defined
   // pair of Curve25519 keys. In this situation, we will generate a new keypair.
-  let cryptoKeys = e3db.Client.generateKeypair();
-  let signingKeys = e3db.Client.generateSigningKeypair();
+  let cryptoKeys = await e3db.Client.generateKeypair();
+  let signingKeys = await e3db.Client.generateSigningKeypair();
 
   console.log('Public Key:          ' + cryptoKeys.publicKey)
   console.log('Private Key:         ' + cryptoKeys.privateKey)
