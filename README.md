@@ -1,21 +1,25 @@
 [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
-# Introduction
+# E3DB JavaScript SDK
 
 The Tozny End-to-End Encrypted Database (E3DB) is a storage platform with powerful sharing and consent management features.
 [Read more on our blog.](https://tozny.com/blog/announcing-project-e3db-the-end-to-end-encrypted-database/)
 
-E3DB provides a familiar JSON-based NoSQL-style API for reading, writing, and querying data stored securely in the cloud.
+This repository contains a fully asynchronous SDK that can be used both for server-side applications with Node as well as in modern browsers.
 
-# Installation
+## Terms of Service
+   
+Your use of E3DB must abide by our [Terms of Service](https://github.com/tozny/e3db-java/blob/master/terms.pdf), as detailed in the linked document.
 
-## NPM
+# Getting Started
+
+## NPM Installation
 
 To install with NPM add the following to your `package.json` file:
 
 ```
 "dependencies": {
-    "e3db": "1.0.0"
+    "e3db": "^1.0.0"
 }
 ```
 
@@ -37,16 +41,39 @@ For a more complete walkthrough, see [`/examples/registration.js`](https://githu
 
 ### Without Credential Backup
 
+ES2017 async/await
 ```js
 const e3db = require('e3db')
 
 let token = '...'
 let clientName = '...'
 
-let [publicKey] = e3db.Client.generateKeypair()
-e3db.Client.register(token, clientName, publicKey)
-  .then(clientInfo => {
-    // ... Run operations with the client's details here
+async function main() {
+  let cryptoKeys  = await e3db.Client.generateKeypair();
+  let signingKeys = await e3db.Client.generateSigningKeypair();
+  let clientInfo  = await e3db.Client.register(token, clientName, cryptoKeys, signingKeys)
+  
+  // ... Run operations with the client's details here
+}
+main()
+```
+
+Promises
+```js
+const e3db = require('e3db')
+
+let token = '...'
+let clientName = '...'
+
+e3db.Client.generateKeypair()
+  .then(cryptoKeys => {
+    e3db.Client.generateSigningKeypair()
+      .then(signingKeys => {
+        e3db.Client.register(token, clientName, cryptoKeys, signingKeys)
+          .then(clientInfo => {
+            // ... Run operations with the client's details here
+          })
+      })
   })
 ```
 
@@ -60,11 +87,14 @@ const e3db = require('e3db')
 let token = '...'
 let clientName = '...'
 
-let [publicKey, privateKey] = e3db.Client.generateKeypair()
-e3db.Client.register(token, clientName, publicKey, privateKey, true)
-  .then(clientInfo => {
-    // ... Run operations with the client's details here
-  })
+async function main() {
+  let cryptoKeys  = await e3db.Client.generateKeypair();
+  let signingKeys = await e3db.Client.generateSigningKeypair();
+  let clientInfo  = await e3db.Client.register(token, clientName, cryptoKeys, signingKeys, true)
+  
+  // ... Run operations with the client's details here
+}
+main()
 ```
 
 The private key must be passed to the registration handler when backing up credentials as it is used to cryptographically sign the encrypted backup file stored on the server. The private key never leaves the system, and the stored credentials will only be accessible to the newly-registered client itself or the account with which it is registered.
@@ -107,13 +137,16 @@ const e3db = require('e3db')
 
 let client = new e3db.Client(/* config */)
 
-client.write('contact', {
-  'first_name': 'Jon',
-  'last_name': 'Snow',
-  'phone': '555-555-1212',
-}).then(record => {
+async function main() {
+  let record = await client.write('contact', {
+    'first_name': 'Jon',
+    'last_name': 'Snow',
+    'phone': '555-555-1212',
+  })
+    
   console.log('Wrote record ' + record.meta.recordId)
-})
+}
+main()
 ```
 
 ## Querying records
@@ -132,14 +165,115 @@ let writer = null
 let record = null
 let type = 'contact'
 
-client.query(data, writer, record, type).next()
-  .then(records => {
-    let fullName = record.data.first_name + ' ' + record.data.last_name
-    console.log(fullName + ' --- ' + record.data.phone)
-  })
+async function main() {
+  let records = await client.query(data, writer, record, type).next()
+  let fullName = record.data.first_name + ' ' + record.data.last_name
+  console.log(fullName + ' --- ' + record.data.phone)
+}
+main()
 ```
 
 In this example, the `e3db.Client::query` method returns an array that contains each record that matches the query.
+
+## Local Encryption & Decryption
+
+The E3DB SDK allows you to encrypt documents for local storage, which can be decrypted later, by the client that created the document or any client with which the document has been `shared`. Note that locally encrypted documents _cannot_ be written directly to E3DB -- they must be decrypted locally and written using the `write` or `update` methods.
+
+Local encryption (and decryption) requires multiple steps:
+
+1. Create a random access key (will be used for both encryption and decryption)
+1. Encrypt the access key for the writer (for encryption)
+1. Call `encrypt` to both sign and encrypt the document
+
+Here is an example of encrypting a document locally:
+
+```js
+const e3db = require('e3db')
+
+let client = new e3db.Client(/* config */)
+
+let document = {
+  line:   "Say I'm the only bee in your bonnet",
+  song:   'Birdhouse in Your Soul',
+  artist: 'They Might Be Giants'
+}
+
+async function main() {
+  let ak = await e3db.Crypto.randomKey()
+  let encryptedAk = await e3db.Crypto.encryptAk(client.config.privateKey, ak, client.config.publicKey)
+  let eak = {eak: encryptedAk, authorizer_public_key: {curve25519: client.config.publicKey}}
+  
+  let encrypted = await client.encrypt('lyric', document, eak)
+  
+  // Write record to storage in suitable format.
+}
+main()
+```
+
+## Local Decryption of Shared Records
+
+When two clients have a sharing relationship, the "reader" can locally decrypt any documents encrypted by the "writer," without using E3DB for storage.
+
+The 'writer' must first share records with a 'reader', using the `share` method. The 'reader' can then decrypt any locally encrypted records as follows:
+
+```js
+const e3db = require('e3db')
+
+let client = new e3db.Client(/* config */)
+
+let encrypted = '' // read encrypted record from local storage
+let eak = '' // Encrypted access key for the reader
+
+async function main() {
+  let record = await client.decrypt(encrypted, eak)
+}
+main()
+```
+
+## Document Signing & Verification
+
+Every E3DB client created with this SDK is capable of signing documents and verifying the signature associated with a document. (Note that E3DB records are also stored with a signature attached, but verification of that is handled internally to the SDK.) By attaching signatures to documents, clients can be confident in:
+
+- Document integrity - the document's contents have not been altered (because the signature will not match).
+- Proof-of-authorship - The author of the document held the private signing key associated with the given public key when the document was created.
+
+To create a signature, use the `sign` method:
+
+```js
+const e3db = require('e3db')
+
+let client = new e3db.Client(/* config */)
+
+let document = {
+  line:   "Say I'm the only bee in your bonnet",
+  song:   'Birdhouse in Your Soul',
+  artist: 'They Might Be Giants'
+}
+
+async function main() {
+ let data = new RecordData(document)
+ let meta = new Meta(client.config.clientId, client.config.clientId, 'lyric', {})
+ 
+ let recordInfo = new RecordInfo(meta, data)
+ let signature = await client.sign(recordInfo)
+ 
+ let signed = new Record(meta, data, signature) 
+}
+main()
+```
+
+To verify a document, use the verify method. Here, we use the same object instances as above. `client.config` holds the private & public keys for the client. (Note that, in general, verify requires the public signing key of the client that wrote the record):
+
+```js
+async function verify() {
+  let signedDocument = new SignedDocument(recordInfo, signature)
+  let verified = await client.verify(signedDocument, client.config.publicSignKey)
+  if (! verified) {
+    // Document failed verification, indicate an error as appropriate
+  }
+}
+verify()
+```
 
 ## More examples
 
