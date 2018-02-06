@@ -8,7 +8,7 @@ The Tozny End-to-End Encrypted Database (E3DB) is a storage platform with powerf
 This repository contains a fully asynchronous SDK that can be used both for server-side applications with Node as well as in modern browsers.
 
 ## Terms of Service
-   
+
 Your use of E3DB must abide by our [Terms of Service](https://github.com/tozny/e3db-java/blob/master/terms.pdf), as detailed in the linked document.
 
 # Getting Started
@@ -19,7 +19,7 @@ To install with NPM add the following to your `package.json` file:
 
 ```
 "dependencies": {
-    "e3db": "^1.0.0"
+    "e3db": "^1.2"
 }
 ```
 
@@ -52,7 +52,7 @@ async function main() {
   let cryptoKeys  = await e3db.Client.generateKeypair();
   let signingKeys = await e3db.Client.generateSigningKeypair();
   let clientInfo  = await e3db.Client.register(token, clientName, cryptoKeys, signingKeys)
-  
+
   // ... Run operations with the client's details here
 }
 main()
@@ -91,7 +91,7 @@ async function main() {
   let cryptoKeys  = await e3db.Client.generateKeypair();
   let signingKeys = await e3db.Client.generateSigningKeypair();
   let clientInfo  = await e3db.Client.register(token, clientName, cryptoKeys, signingKeys, true)
-  
+
   // ... Run operations with the client's details here
 }
 main()
@@ -143,7 +143,7 @@ async function main() {
     'last_name': 'Snow',
     'phone': '555-555-1212',
   })
-    
+
   console.log('Wrote record ' + record.meta.recordId)
 }
 main()
@@ -202,9 +202,9 @@ async function main() {
   let ak = await e3db.Crypto.randomKey()
   let encryptedAk = await e3db.Crypto.encryptAk(client.config.privateKey, ak, client.config.publicKey)
   let eak = {eak: encryptedAk, authorizer_public_key: {curve25519: client.config.publicKey}}
-  
+
   let encrypted = await client.encrypt('lyric', document, eak)
-  
+
   // Write record to storage in suitable format.
 }
 main()
@@ -253,11 +253,11 @@ let document = {
 async function main() {
  let data = new RecordData(document)
  let meta = new Meta(client.config.clientId, client.config.clientId, 'lyric', {})
- 
+
  let recordInfo = new RecordInfo(meta, data)
  let signature = await client.sign(recordInfo)
- 
- let signed = new Record(meta, data, signature) 
+
+ let signed = new Record(meta, data, signature)
 }
 main()
 ```
