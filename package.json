@@ -9,9 +9,15 @@
     "url": "https://tozny.com"
   },
   "license": "proprietary",
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "main": "dist/index.js",
-  "keywords": ["encryption", "encrypted-store", "api-client"],
+  "keywords": [
+    "encryption",
+    "encrypted-store",
+    "api-client"
+  ],
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -28,7 +34,7 @@
     "jest-cli": "^22.4.3",
     "lint-staged": "^7.0.4",
     "nsp": "^3.2.1",
-    "prettier": "^1.11.1"
+    "prettier": "^1.12.1"
   },
   "scripts": {
     "prepublish": "nsp check && babel lib -d dist --ignore lib/__tests__",
@@ -36,22 +42,39 @@
     "precommit": "lint-staged",
     "test": "jest",
     "testcov": "jest --coverage",
-    "build": "babel lib -d dist --ignore lib/__tests__"
+    "build": "babel lib -d dist --ignore lib/__tests__",
+    "profile": "jest profile.test"
   },
   "lint-staged": {
-    "*.js": ["eslint --fix", "git add"],
-    "*.json": ["prettier --write", "git add"]
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.json": [
+      "prettier --write",
+      "git add"
+    ]
   },
   "eslintConfig": {
-    "extends": ["xo", "prettier"],
+    "extends": [
+      "xo",
+      "prettier"
+    ],
     "env": {
       "jest": true,
       "node": true
     },
     "rules": {
-      "max-params": ["error", 9],
-      "no-prototype-builtins": ["off"],
-      "no-await-in-loop": ["off"],
+      "max-params": [
+        "error",
+        9
+      ],
+      "no-prototype-builtins": [
+        "off"
+      ],
+      "no-await-in-loop": [
+        "off"
+      ],
       "prettier/prettier": [
         "error",
         {
@@ -60,7 +83,9 @@
         }
       ]
     },
-    "plugins": ["prettier"]
+    "plugins": [
+      "prettier"
+    ]
   },
   "repository": "https://github.com/tozny/e3db-js",
   "jest": {
