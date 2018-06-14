@@ -199,9 +199,7 @@ let document = {
 }
 
 async function main() {
-  let ak = await e3db.Crypto.randomKey()
-  let encryptedAk = await e3db.Crypto.encryptAk(client.config.privateKey, ak, client.config.publicKey)
-  let eak = {eak: encryptedAk, authorizer_public_key: {curve25519: client.config.publicKey}}
+  let eak = await client.createWriterKey('lyric')
 
   let encrypted = await client.encrypt('lyric', document, eak)
 
@@ -221,10 +219,12 @@ const e3db = require('e3db')
 
 let client = new e3db.Client(/* config */)
 
+let writerId = '' // UUID of the record creator
 let encrypted = '' // read encrypted record from local storage
-let eak = '' // Encrypted access key for the reader
 
 async function main() {
+  let eak = await client.getReaderKey(writerId, writerId, 'lyric') // Encrypted access key for the reader
+  
   let record = await client.decrypt(encrypted, eak)
 }
 main()
