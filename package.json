@@ -4,8 +4,8 @@
   "description": "JavaScript client library for E3DB",
   "homepage": "https://github.com/tozny/e3db-js",
   "author": {
-    "name": "Eric Mann",
-    "email": "eric@tozny.com",
+    "name": "Tozny, LLC",
+    "email": "info@tozny.com",
     "url": "https://tozny.com"
   },
   "license": "proprietary",
