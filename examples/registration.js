@@ -12,6 +12,7 @@
 */
 
 const e3db = require('../dist/index.js')
+require('dotenv').config()
 
 async function main() {
   /**
@@ -45,7 +46,6 @@ async function main() {
   // Passing all of the data above into the registration routine will create
   // a new client with the system. Remember to keep your private key private!
   let clientInfo = await e3db.Client.register(token, clientName, cryptoKeys, signingKeys, false, apiUrl)
-
   // Optionally, you can automatically back up the credentials of the newly-created
   // client to your InnoVault account (accessible via https://console.tozny.com) by
   // passing your private key and a backup flag when registering. The private key is

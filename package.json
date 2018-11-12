@@ -37,7 +37,7 @@
   },
   "scripts": {
     "prepare": "babel lib -d dist --ignore lib/__tests__",
-    "pretest": "eslint .  && babel lib -d dist --ignore lib/__tests__",
+    "pretest": "babel lib -d dist --ignore lib/__tests__",
     "precommit": "lint-staged",
     "test": "jest",
     "testcov": "jest --coverage",
@@ -92,6 +92,7 @@
   },
   "dependencies": {
     "babel-runtime": "^6.26",
+    "dotenv": "^6.1.0",
     "es6-promise": "^4.2.4",
     "isomorphic-fetch": "^2.2",
     "libsodium-wrappers": "^0.7.3"

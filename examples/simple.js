@@ -8,6 +8,8 @@
  */
 
 const e3db = require('../dist/index.js')
+require('dotenv').config()
+
 
 /**
  * ---------------------------------------------------------
@@ -28,6 +30,7 @@ let config = new e3db.Config(
   process.env.PRIVATE_SIGN_KEY
 )
 
+
 // Now create a client using that configuration
 let client = new e3db.Client(config)
 
@@ -37,6 +40,7 @@ async function main() {
    * Writing a record
    * ---------------------------------------------------------
    */
+
 
   // Create a record by first creating a local version as an object:
   let doc = {
