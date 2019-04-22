@@ -39,7 +39,7 @@
     "regenerator-runtime": "^0.13.1"
   },
   "scripts": {
-    "prepublish": "nsp check && babel lib -d dist --ignore lib/__tests__",
+    "prepublish": "nsp audit && babel lib -d dist --ignore lib/__tests__",
     "pretest": "eslint .  && babel lib -d dist --ignore lib/__tests__",
     "precommit": "lint-staged",
     "test": "jest",
