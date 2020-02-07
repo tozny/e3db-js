@@ -1,10 +1,10 @@
 /**
  * This program provides a simple example illustrating how to programmatically
- * register a client with InnoVault and e3db. In some situations, it's preferable
+ * register a client with TozStore. In some situations, it's preferable
  * to register a client from the server or system that will be using its
  * credentials (to ensure that all data is truly encrypted from end-to-end
  * with no possibilities of a credential leak). For more detailed information,
- * please see the documentation home page: https://tozny.com/documentation/e3db
+ * please see the documentation home page: https://developers.tozny.com
  *
  * @author    Eric Mann <eric@tozny.com>
  * @copyright Copyright (c) 2017 Tozny, LLC
@@ -47,7 +47,7 @@ async function main() {
   let clientInfo = await e3db.Client.register(token, clientName, cryptoKeys, signingKeys, false, apiUrl)
 
   // Optionally, you can automatically back up the credentials of the newly-created
-  // client to your InnoVault account (accessible via https://console.tozny.com) by
+  // client to your Tozny account (accessible via https://dashboard.tozny.com) by
   // passing your private key and a backup flag when registering. The private key is
   // not sent anywhere, but is used by the newly-created client to sign an encrypted
   // copy of its credentials that is itself stored in e3db for later use.
