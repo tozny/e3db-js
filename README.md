@@ -35,7 +35,7 @@ NPM will automatically amend your `package.json` file for you with the latest pa
 
 ## Registering a client
 
-Register an account with [InnoVault](https://innovault.io) to get started. From the Admin Console you can create clients directly (and grab their credentials from the console) or create registration tokens to dynamically create clients with `e3db.Client.register()`. Clients registered from within the console will automatically back their credentials up to your account. Clients created dynamically via the SDK can _optionally_ back their credentials up to your account.
+Register an account with [Tozny](https://dashboard.tozny.com) to get started. From the Admin Console you can create clients directly (and grab their credentials from the console) or create registration tokens to dynamically create clients with `e3db.Client.register()`. Clients registered from within the console will automatically back their credentials up to your account. Clients created dynamically via the SDK can _optionally_ back their credentials up to your account.
 
 For a more complete walkthrough, see [`/examples/registration.js`](https://github.com/tozny/e3db-js/blob/master/examples/registration.js).
 
