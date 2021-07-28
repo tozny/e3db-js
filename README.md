@@ -1,5 +1,7 @@
 [![Build Status][travis-image]][travis-url] [![Coverage Status][coveralls-image]][coveralls-url] [![NPM version][npm-image]][npm-url] [![Dependency Status][daviddm-image]][daviddm-url]
 
+# This repository is deprecated and unmaintained. Please use https://github.com/tozny/js-sdk
+
 # E3DB JavaScript SDK
 
 The Tozny End-to-End Encrypted Database (E3DB) is a storage platform with powerful sharing and consent management features.
